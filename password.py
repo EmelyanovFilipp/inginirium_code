@@ -1,4 +1,4 @@
-password = "password"
+password = 1488
 
 def ask_password():
     for i in range(3):

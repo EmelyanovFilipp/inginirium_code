@@ -1,0 +1,44 @@
+import tkinter as t
+import random
+
+
+def move_player(event):
+    if event.keysym == 'w':
+        canvas.move(player, 0, -10)
+    if event.keysym == 'a':
+        canvas.move(player, -10, 0)
+    if event.keysym == 's':
+        canvas.move(player, 0, 10)
+    if event.keysym == 'd':
+        canvas.move(player, 10, 0)
+
+
+def create_point():
+    global point
+    point_pos = (random.randint(1, 1000), random.randint(1, 1000))
+    point = canvas.create_oval(point_pos[0], point_pos[1], point_pos[0] + 15, point_pos[1] + 15, fill='#ffffff')
+
+
+def restart_game():
+    global canvas, player
+    start_pos = (random.randint(1, 1000), random.randint(1, 1000))
+    player = canvas.create_rectangle(start_pos[0], start_pos[1], start_pos[0] + 20, start_pos[1] + 20, fill='#ffffff')
+
+
+r = t.Tk()
+r.title('my game')
+r.geometry('1000x1000')
+
+label_score = t.Label(r, text='ngnrm')
+rb = t.Button(text="s", command=restart_game)
+canvas = t.Canvas(r, width=1500, height=700, bg='#000000')
+
+player = ''
+point = ''
+label_score.pack()
+rb.pack()
+canvas.pack()
+r.bind('<KeyPress>', move_player)
+r.mainloop()
+
+
